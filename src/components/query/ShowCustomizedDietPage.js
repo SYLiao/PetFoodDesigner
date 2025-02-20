@@ -46,7 +46,7 @@ function ShowCustomizedDietPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={51} />
-      <h1>Shaw's Customized Diet</h1>
+      <h1>{dogDataModel?.name}'s Customized Diet</h1>
       <p>Based on what you have told us about Shaw, our nutritionist recommends the following recipes. Let Shaw know that yumminess is on the way!</p>
 
       {recipeModel && Object.keys(recipeModel).length > 0 && (

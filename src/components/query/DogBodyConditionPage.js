@@ -21,7 +21,7 @@ function DogBodyConditionPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={18} /> {/* Update progress to reflect page position */}
-      <h1>Describe Shaw's body condition</h1>
+      <h1>Describe {dogDataModel?.name}'s body condition</h1>
       <p>Select the option that best describes your dog's body condition.</p>
 
       <div class="vsp-div-radioslider">

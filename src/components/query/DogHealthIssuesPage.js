@@ -65,7 +65,7 @@ function DogHealthIssuesPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={35} />
-      <h1>Does Shaw have any health or digestive issues?</h1>
+      <h1>Does {dogDataModel?.name} have any health or digestive issues?</h1>
       <div className="query-page-options">
         <label>
           <input

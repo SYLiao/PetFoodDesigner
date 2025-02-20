@@ -79,7 +79,7 @@ function DogBreedPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={9} />
-      <h1>What kind of dog is Shaw?</h1>
+      <h1>What kind of dog is {dogDataModel?.name}?</h1>
       <p>Many dogs are a unique blend of breeds, but a rough idea is still helpful. We use breed information to estimate your dog’s appropriate size and weight. That way, our nutritionists can recommend the right caloric intake.</p>
 
       {loading ? (

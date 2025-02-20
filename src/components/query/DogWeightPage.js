@@ -19,7 +19,7 @@ function DogWeightPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={15} />
-      <h1>What is Shaw's current weight?</h1>
+      <h1>What is {dogDataModel?.name}'s current weight?</h1>
       <p>No judgment here. We use this information to help your dog stay on track, slim down or bulk up in a healthy, sustainable way.</p>
 
       <div className="input-row">

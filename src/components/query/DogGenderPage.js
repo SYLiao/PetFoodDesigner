@@ -69,7 +69,7 @@ function DogGenderPage() {
 
       {dogData?.gender === 'female' && (
         <div className="neutered-spayed-container">
-          <h2>Is Shaw spayed?</h2>
+          <h2>Is {dogDataModel?.name} spayed?</h2>
           <div className="options-container">
             <button onClick={() => handleSpayedSelect(true)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '3' ? 'selected' : 'unselected'}`}>
               Yes

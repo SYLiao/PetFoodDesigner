@@ -21,7 +21,7 @@ function DogTreatPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={23} />
-      <h1>How many treats does Shaw get each day?</h1>
+      <h1>How many treats does {dogDataModel?.name} get each day?</h1>
 
       <div class="vsp-div-radioslider">
       <div class="form-container vsp-div-radioslider-item" style={{display: 'flex', width: '95%'}}>

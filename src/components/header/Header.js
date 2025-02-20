@@ -5,7 +5,7 @@ function Header({ navLinks }) {
   return (
     <header className="app-header">
       <div className="logo-container">
-        <img src="/images/logo.svg" alt="PetPlate Logo" className="logo" />
+        <img src="/images/logo.svg" alt="PetFoodDesigner" className="logo" />
       </div>
       <nav className="navigation">
         <ul className="nav-links">

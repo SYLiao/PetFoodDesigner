@@ -21,7 +21,7 @@ function DogActiveLevelPage() {
   return (
     <div className="query-page">
       <ProgressBar progress={21} />
-      <h1>How active is Shaw?</h1>
+      <h1>How active is {dogDataModel?.name}?</h1>
       <p>Sleeps all day? Can’t sit still? Or something in between? Different activity levels call for different diets.</p>
 
       <div class="vsp-div-radioslider">

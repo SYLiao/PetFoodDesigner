@@ -26,7 +26,7 @@ function DogAgePage() {
   return (
     <div className="query-page">
       <ProgressBar progress={6} />
-      <h1>How old is Shaw?</h1>
+      <h1>How old is {dogDataModel?.name}?</h1>
       <p className="subtitle">From puppy to senior, your dog’s age helps determine the vitamins and nutrients they need to live their best life.</p>
       <p className="light-text">Enter their current age below</p>
       <div className="input-group">
