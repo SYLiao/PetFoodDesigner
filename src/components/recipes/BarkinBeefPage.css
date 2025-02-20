@@ -1,0 +1,172 @@
+.barkin-beef-page {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.barkin-beef-page .hero {
+  background-color: #f8f8f8;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.barkin-beef-page .hero-content {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.barkin-beef-page .hero-content .recipe-name {
+  font-size: 3.0em;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.barkin-beef-page .hero-content .recipe-subtitle {
+  font-size: 1.3em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.barkin-beef-page .hero-content .button.customize-button {
+  background-color: #e44d26; /* PetPlate orange */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.barkin-beef-page .hero-image {
+  flex: 1;
+  text-align: right;
+}
+
+.barkin-beef-page .hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.barkin-beef-page .recipe-details,
+.barkin-beef-page .guaranteed-analysis,
+.barkin-beef-page .calorie-content,
+.barkin-beef-page .feeding-instructions,
+.barkin-beef-page .customer-reviews {
+  padding: 60px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.barkin-beef-page .recipe-details h2,
+.barkin-beef-page .guaranteed-analysis h2,
+.barkin-beef-page .calorie-content h2,
+.barkin-beef-page .feeding-instructions h2,
+.barkin-beef-page .customer-reviews h2 {
+  font-size: 2.0em;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.barkin-beef-page .recipe-highlights .highlights-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+
+.barkin-beef-page .recipe-highlights .highlights-list li {
+  text-align: center;
+}
+
+.barkin-beef-page .recipe-highlights .highlights-list li img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.barkin-beef-page .recipe-highlights .highlights-list li span {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.barkin-beef-page .ingredients-section {
+  text-align: center;
+}
+
+.barkin-beef-page .ingredients-section .ingredient-list {
+  list-style: none;
+  padding: 0;
+  display: inline-block; /* Center the list */
+  text-align: left;
+}
+
+.barkin-beef-page .ingredients-section .ingredient-list li {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.barkin-beef-page .ingredients-section .button.ingredient-button {
+  background-color: #f8f8f8;
+  color: #e44d26;
+  border: 1px solid #e44d26;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+
+.barkin-beef-page .analysis-table-container {
+  overflow-x: auto;
+  margin-top: 30px;
+}
+
+.barkin-beef-page .analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.barkin-beef-page .analysis-table th,
+.barkin-beef-page .analysis-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.barkin-beef-page .analysis-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.barkin-beef-page .calorie-content,
+.barkin-beef-page .feeding-instructions {
+  text-align: center;
+}
+
+.barkin-beef-page .calorie-content p,
+.barkin-beef-page .feeding-instructions .feeding-text p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.barkin-beef-page .customer-reviews .review-container {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.barkin-beef-page .customer-reviews .no-reviews {
+  font-style: italic;
+  color: #777;
+  font-size: 1.1em;
+}

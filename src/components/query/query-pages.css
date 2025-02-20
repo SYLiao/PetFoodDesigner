@@ -1,0 +1,624 @@
+.query-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  min-height: 100%;
+  padding-bottom: 70px;
+}
+
+.query-page h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.query-page p {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.query-page input[type="text"],
+.query-page .form-input,
+.query-page input[type="number"] { /* Add number input style */
+  padding: 15px;
+  font-size: 1em;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.query-page .input-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align labels to the start */
+  margin-bottom: 20px;
+  width: 300px; /* Match input width */
+}
+
+.query-page .input-row label {
+  margin-bottom: 5px;
+  font-weight: bold; /* Make labels stand out */
+  color: #333; /* Darken label text */
+}
+
+.query-page .input-row input[type="number"] {
+  width: 100%; /* Input takes full width of input-row */
+}
+
+.query-page .weight-input {
+    padding: 15px;
+    font-size: 1em;
+    border: 2px solid #ff6f61; /* PetPlate red border */
+    border-radius: 10px; /* More rounded corners */
+    margin-top: 10px; /* Space from label */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.query-page .weight-input:focus {
+    border-color: #f46051; /* Darker red on focus */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow on focus */
+    outline: none; /* Remove default focus outline */
+}
+
+.query-page .options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.selected {
+  background-color: #e0e0e0;
+}
+
+.unselected {
+  background-color: #f0f0f0;
+}
+
+.gender-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  width: 200px;
+  text-decoration: none;
+}
+
+.gender-option:hover {
+  background-color: #e0e0e0;
+}
+
+.gender-option i {
+  margin-right: 10px;
+  font-size: 1.5em; /* Increased icon size */
+}
+
+.page-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #ff6f61; /* Example PetPlate red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.query-page .page-button:hover {
+  background-color: #f46051;
+}
+
+.query-page .subtitle {
+  color: #666;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.query-page .light-text {
+  color: #999;
+  font-size: 1em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.query-page .input-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.query-page .age-input {
+  padding: 15px;
+  font-size: 1em;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 80px;
+  margin: 0 10px;
+  text-align: center;
+}
+
+.neutered-spayed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.neutered-spayed-container h2 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.neutered-spayed-option {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.neutered-spayed-option:hover {
+  background-color: #e0e0e0;
+}
+
+.neutered-spayed-container .options-container {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.neutered-spayed-container .options-container .neutered-spayed-option {
+  margin: 0 10px;
+}
+
+.body-condition-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.condition-line {
+    width: 80%;
+    height: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.condition-options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Make options container take full width */
+    padding: 0 10%; /* Add padding to align with the line */
+}
+
+.condition-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.condition-icon-placeholder {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+}
+
+.condition-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.condition-option input[type="radio"] {
+    margin-top: 5px;
+}
+
+.query-page-options {
+  display: flex;
+  justify-content: center;
+}
+
+.health-issues-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.health-issues-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.health-issues-options label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.protein-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.protein-option {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.protein-option img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.protein-option label {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+}
+
+.protein-option.selected {
+  border-color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.2em;
+  color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark i {
+  font-size: 1.5em;
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.protein-option {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.protein-option img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.protein-option label {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+}
+
+.protein-option.selected {
+  border-color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.5em;
+  color: #ff6f61; /* PetPlate red */
+}
+
+.breed-select-container {
+  position: relative;
+  width: 300px;
+}
+
+.breed-input {
+  padding: 15px;
+  font-size: 1em;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding-right: 40px; /* Space for the button */
+}
+
+.breed-dropdown-button {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #666;
+}
+
+.breed-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.breed-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.breed-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.protein-option {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.protein-option img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.protein-option label {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+}
+
+.protein-option.selected {
+  border-color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.5em;
+  color: #ff6f61; /* PetPlate red */
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.protein-option {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.protein-option img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.protein-option label {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+}
+
+.protein-option.selected {
+  border-color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.5em;
+  color: #ff6f61; /* PetPlate red */
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.protein-option {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.protein-option img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.protein-option label {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.protein-option.selected {
+  border-color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.5em;
+  color: #ff6f61; /* PetPlate red */
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-name {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.protein-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.protein-option {
+  width: 200px;
+  height: 250px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.protein-option img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.protein-option label {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.protein-option.selected {
+  border-color: #ff6f61; /* PetPlate red */
+}
+
+.protein-option .checkmark {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1.5em;
+  color: #ff6f61; /* PetPlate red */
+}

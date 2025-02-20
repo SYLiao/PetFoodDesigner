@@ -1,0 +1,179 @@
+.header {
+  background-color: #ffffff;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header h1 {
+  color: #333;
+  margin: 0;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.header-nav a {
+  color: #555;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  color: #555;
+  text-decoration: none;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0; /* Align to the right of the toggle */
+  top: 100%; /* Position dropdown below the toggle */
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #e0e0e0;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.main {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fafafa; /* Light grey background for main content */
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 50px;
+  background-color: #f0f8ff; /* Light blue background for hero section */
+  padding: 50px 20px;
+  border-radius: 5px;
+}
+
+.hero-section h2 {
+  color: #333;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero-section p {
+  color: #666;
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.hero-section button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.feature-section {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.feature-box {
+  flex: 1;
+  min-width: 300px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.feature-box h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.feature-box p {
+  color: #666;
+}
+
+.review-section {
+  text-align: center;
+  padding: 30px;
+  background-color: #f0f0f0; /* Light grey background for review section, slightly darker than main */
+  border-radius: 5px;
+}
+
+.review-section h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.review-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.review-box {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.review-box p.quote {
+  color: #555;
+  font-style: italic;
+}
+
+.review-box p.author {
+  color: #777;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+.footer {
+  background-color: #e0e0e0; /* Slightly darker grey for footer */
+  color: #555;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #d0d0d0;
+  margin-top: 60px;
+}

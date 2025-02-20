@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    getPreBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+    postBuild:
+      commands:
+        - mv build/* .
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+  rewrite:
+    - from: '/*'
+      to: /index.html
+      status: 200

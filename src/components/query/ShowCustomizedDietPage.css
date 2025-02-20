@@ -1,0 +1,45 @@
+.diet-display {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.diet-content {
+  display: flex;
+  align-items: center;
+}
+
+.diet-image {
+  width: 20%;
+  padding-right: 10px;
+}
+
+.diet-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.diet-text {
+  width: 80%;
+}
+
+.diet-text table {
+  border: none;
+  width: 100%;
+}
+
+.diet-text td {
+  border: none;
+  padding: 5px;
+}
+
+.diet-text button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
