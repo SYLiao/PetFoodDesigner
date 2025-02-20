@@ -26,7 +26,7 @@ const navLinks = [
     ],
   },
   { text: 'About Us', href: '/about' },
-  { text: 'Get Started', href: '/subscription' },
+  { text: 'Get Started', href: '/dog-name-form' },
 ];
 
 function HomePage() {
