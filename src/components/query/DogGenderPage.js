@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './query-pages.css';
 import QueryFooter from '../footer/QueryFooter';
 import useDogModel from './dogModel';
 import ProgressBar from '../progressbar/ProgressBar';
 
 function DogGenderPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const { dogDataModel, loading, error, fetchDogData, saveDogData } = useDogModel();
   const [dogData, setDogData] = useState(dogDataModel || null);
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
   const handleGenderSelect = (genderValue) => {
     setDogData({...dogData, gender: genderValue});
@@ -36,52 +44,62 @@ function DogGenderPage() {
 
   return (
     <div className="query-page">
-      <ProgressBar progress={12} />
-      <h1>What is Shaw's gender?</h1>
-      <div className="options-container">
-        <button
-          className={`${dogData?.gender === 'male' ? 'selected' : 'unselected'} option-button gender-option`}
-          onClick={() => handleGenderSelect('male')}
-        >
-          <i className="bi bi-gender-male"></i> Male
-        </button>
-        <button
-          className={`${dogData?.gender === 'female' ? 'selected' : 'unselected'} option-button gender-option`}
-          onClick={() => handleGenderSelect('female')}
-        >
-          <i className="bi bi-gender-female"></i> Female
-        </button>
-      </div>
-
-      {dogData?.gender === 'male' && (
-        <div className="neutered-spayed-container">
-          <h2>Is Shaw neutered?</h2>
-          <div className="options-container">
-            <button onClick={() => handleNeuteredSelect(true)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '1' ? 'selected' : 'unselected'}`}>
-              Yes
-            </button>
-            <button onClick={() => handleNeuteredSelect(false)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '2' ? 'selected' : 'unselected'}`}>
-              No
-            </button>
+      {isLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
-      )}
-
-      {dogData?.gender === 'female' && (
-        <div className="neutered-spayed-container">
-          <h2>Is {dogDataModel?.name} spayed?</h2>
+      ) : (
+        <div className='query-container'>
+          <ProgressBar progress={12} />
+          <h1>What is Shaw's gender?</h1>
           <div className="options-container">
-            <button onClick={() => handleSpayedSelect(true)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '3' ? 'selected' : 'unselected'}`}>
-              Yes
+            <button
+              className={`${dogData?.gender === 'male' ? 'selected' : 'unselected'} option-button gender-option`}
+              onClick={() => handleGenderSelect('male')}
+            >
+              <i className="bi bi-gender-male"></i> Male
             </button>
-            <button onClick={() => handleSpayedSelect(false)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '2' ? 'selected' : 'unselected'}`}>
-              No
+            <button
+              className={`${dogData?.gender === 'female' ? 'selected' : 'unselected'} option-button gender-option`}
+              onClick={() => handleGenderSelect('female')}
+            >
+              <i className="bi bi-gender-female"></i> Female
             </button>
           </div>
+
+          {dogData?.gender === 'male' && (
+            <div className="neutered-spayed-container">
+              <h2>Is Shaw neutered?</h2>
+              <div className="options-container">
+                <button onClick={() => handleNeuteredSelect(true)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '1' ? 'selected' : 'unselected'}`}>
+                  Yes
+                </button>
+                <button onClick={() => handleNeuteredSelect(false)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '2' ? 'selected' : 'unselected'}`}>
+                  No
+                </button>
+              </div>
+            </div>
+          )}
+
+          {dogData?.gender === 'female' && (
+            <div className="neutered-spayed-container">
+              <h2>Is {dogDataModel?.name} spayed?</h2>
+              <div className="options-container">
+                <button onClick={() => handleSpayedSelect(true)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '3' ? 'selected' : 'unselected'}`}>
+                  Yes
+                </button>
+                <button onClick={() => handleSpayedSelect(false)} className={`option-button neutered-spayed-option ${dogData?.lifePhaseId === '2' ? 'selected' : 'unselected'}`}>
+                  No
+                </button>
+              </div>
+            </div>
+          )}
+
+          <QueryFooter saveDogData={saveAgeChange} dogData={dogData} back={"/dog-breed-form"} next={"/dog-weight-form"} />
         </div>
       )}
-
-      <QueryFooter saveDogData={saveAgeChange} dogData={dogData} back={"/dog-breed-form"} next={"/dog-weight-form"}/>
     </div>
   );
 }

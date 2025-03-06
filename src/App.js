@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './static/styles.css';
 import Header from './components/header/Header';
 import BarkinBeefPage from './components/recipes/BarkinBeefPage';
@@ -15,6 +16,8 @@ import DogActiveLevelPage from './components/query/DogActiveLevelPage';
 import DogHealthIssuesPage from './components/query/DogHealthIssuesPage';
 import DogProteinChoicePage from './components/query/DogProteinChoicePage';
 import ShowCustomizedDietPage from './components/query/ShowCustomizedDietPage';
+import LoginPage from './user/LoginPage';
+import IngredientFormPage from './components/IngredientFormPage';
 
 const navLinks = [
   { text: 'Home', href: '/' },
@@ -26,6 +29,8 @@ const navLinks = [
     ],
   },
   { text: 'About Us', href: '/about' },
+  { text: 'Sign in', href: '/login' },
+  { text: 'Ingredient Form', href: '/ingredient-form' },
   { text: 'Get Started', href: '/dog-name-form' },
 ];
 
@@ -59,7 +64,7 @@ function HomePage() {
             <p className="author">- Happy Dog Owner</p>
           </div>
           <div className="review-box">
-            <p className="quote">"Since switching to PetPlate, my dog's digestion has improved and he has so much more energy!"</p>
+            <p className="quote">"Since switching to PetDesigner, my dog's digestion has improved and he has so much more energy!"</p>
             <p className="author">- Another Happy Owner</p>
           </div>
         </div>
@@ -69,26 +74,31 @@ function HomePage() {
 }
 
 function App() {
+  const location = useLocation();
+  const nodeRef = useRef(null);
+
   return (
-      <div>
+      <div ref={nodeRef}>
         <Header navLinks={navLinks} />
 
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/entree/beef" element={<BarkinBeefPage />} />
-          <Route path="/subscription" element={<SubscriptionIntroPage />} />
-          <Route path="/dog-name-form" element={<DogNameFormPage />} />
-          <Route path="/dog-age-form" element={<DogAgePage />} /> {/* Add route for DogAgePage */}
-          <Route path="/dog-breed-form" element={<DogBreedPage />} />
-          <Route path="/dog-gender-form" element={<DogGenderPage />} />
-          <Route path="/dog-weight-form" element={<DogWeightPage />} /> {/* Add route for DogWeightPage */}
-          <Route path="/dog-body-condition-form" element={<DogBodyConditionPage />} />
-          <Route path="/dog-active-level-form" element={<DogActiveLevelPage />} />
-          <Route path="/dog-treat-form" element={<DogTreatPage />} />
-          <Route path="/dog-health-issues-form" element={<DogHealthIssuesPage />} />
-          <Route path="/dog-protein-choice-form" element={<DogProteinChoicePage />} />
-          <Route path="/show-customized-diet" element={<ShowCustomizedDietPage />} />
-        </Routes>
+            <Routes location={location}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/entree/beef" element={<BarkinBeefPage />} />
+              <Route path="/subscription" element={<SubscriptionIntroPage />} />
+              <Route path="/dog-name-form" element={<DogNameFormPage />} />
+              <Route path="/dog-age-form" element={<DogAgePage />} /> {/* Add route for DogAgePage */}
+              <Route path="/dog-breed-form" element={<DogBreedPage />} />
+              <Route path="/dog-gender-form" element={<DogGenderPage />} />
+              <Route path="/dog-weight-form" element={<DogWeightPage />} /> {/* Add route for DogWeightPage */}
+              <Route path="/dog-body-condition-form" element={<DogBodyConditionPage />} />
+              <Route path="/dog-active-level-form" element={<DogActiveLevelPage />} />
+              <Route path="/dog-treat-form" element={<DogTreatPage />} />
+              <Route path="/dog-health-issues-form" element={<DogHealthIssuesPage />} />
+              <Route path="/dog-protein-choice-form" element={<DogProteinChoicePage />} />
+              <Route path="/show-customized-diet" element={<ShowCustomizedDietPage />} />
+              <Route path="/ingredient-form" element={<IngredientFormPage />} />
+            </Routes>
       </div>
   );
 }

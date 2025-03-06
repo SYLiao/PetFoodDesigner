@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProgressBar from '../progressbar/ProgressBar';
 import QueryFooter from '../footer/QueryFooter';
 import './query-pages.css';
 import useDogModel from './dogModel';
 
 function DogHealthIssuesPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const healthIssueOptions = [
     { id:1, name: 'Poor Digestive Performance', image: '/images/beef.jpg' },
     { id:2, name: 'Poor Skin & Coat', image: '/images/chicken.jpg' },
@@ -30,6 +31,13 @@ function DogHealthIssuesPage() {
   const [dogData, setDogData] = useState(dogDataModel || null);
   var hasHealthIssue = dogData?.hasHealthIssue || false;
   let healthIssueSelected = dogData?.healthIssueSelected || healthIssueList;
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
   const handleHasHealthIssueChange = () => {
     setDogData({...dogData, hasHealthIssue: true});
@@ -64,49 +72,59 @@ function DogHealthIssuesPage() {
 
   return (
     <div className="query-page">
-      <ProgressBar progress={35} />
-      <h1>Does {dogDataModel?.name} have any health or digestive issues?</h1>
-      <div className="query-page-options">
-        <label>
-          <input
-            type="radio"
-            name="healthIssues"
-            value="no"
-            className="query-page-option-button"
-            checked={!hasHealthIssue}
-            onChange={handleNoHealthIssueChange}
-          />
-          No
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="healthIssues"
-            value="yes"
-            className="query-page-option-button"
-            checked={hasHealthIssue}
-            onChange={handleHasHealthIssueChange}
-          />
-          Yes
-        </label>
-      </div>
-
-      {hasHealthIssue && (
-        <div className="health-issues-container">
-          <p>Choose all that apply</p>
-          <div className="health-issues-options" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-          {healthIssueOptions.map((healthIssueOption) => (
-            <div style={{ width: '50%' }} onClick={() => handleHealthIssueChange(healthIssueOption.id)}>
-            <label style={{ display: 'flex', alignItems: 'center' }}>
-              <input type="checkbox" name="healthIssue" value="Poor Digestive Performance" checked={healthIssueOption.id <healthIssueSelected.length && healthIssueSelected[healthIssueOption.id - 1] === true}/>
-              {healthIssueOption.name}
-            </label>
-          </div>
-          ))}
+      {isLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
+      ) : (
+        <div className='query-container'>
+          <ProgressBar progress={35} />
+          <h1>Does {dogDataModel?.name} have any health or digestive issues?</h1>
+          <div className="query-page-options">
+            <label>
+              <input
+                type="radio"
+                name="healthIssues"
+                value="no"
+                className="query-page-option-button"
+                checked={!hasHealthIssue}
+                onChange={handleNoHealthIssueChange}
+              />
+              No
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="healthIssues"
+                value="yes"
+                className="query-page-option-button"
+                checked={hasHealthIssue}
+                onChange={handleHasHealthIssueChange}
+              />
+              Yes
+            </label>
+          </div>
+
+          {hasHealthIssue && (
+            <div className="health-issues-container">
+              <p>Choose all that apply</p>
+              <div className="health-issues-options" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                {healthIssueOptions.map((healthIssueOption) => (
+                  <div style={{ width: '50%' }} onClick={() => handleHealthIssueChange(healthIssueOption.id)}>
+                    <label style={{ display: 'flex', alignItems: 'center' }}>
+                      <input type="checkbox" name="healthIssue" value="Poor Digestive Performance" checked={healthIssueOption.id < healthIssueSelected.length && healthIssueSelected[healthIssueOption.id - 1] === true} />
+                      {healthIssueOption.name}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          <QueryFooter saveDogData={saveChange} dogData={dogData} back={"/dog-treat-form"} next={"/dog-protein-choice-form"} />
+        </div>
       )}
-      <QueryFooter saveDogData={saveChange} dogData={dogData} back={"/dog-treat-form"} next={"/dog-protein-choice-form"}/>
     </div>
   );
 }

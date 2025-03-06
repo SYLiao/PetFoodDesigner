@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProgressBar from '../progressbar/ProgressBar';
 import QueryFooter from '../footer/QueryFooter';
 import './query-pages.css';
 import useDogModel from './dogModel';
 
 function DogProteinChoicePage() {
+  const [isLoading, setIsLoading] = useState(true);
   const proteinOptions = [
     { id:1, name: 'Beef Recipe', image: './img/protein/beef.png' },
     { id:2, name: 'Chicken Recipe', image: './img/protein/chicken.png' },
@@ -17,6 +18,14 @@ function DogProteinChoicePage() {
 	const { dogDataModel, loading, error, fetchDogData, saveDogData } = useDogModel();
   const [dogData, setDogData] = useState(dogDataModel || null);
   var selectedProtein = "";
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
+
   if (dogData?.proteinId > 0) {
     selectedProtein = proteinOptions[dogData?.proteinId - 1]["name"] || '';
   }
@@ -35,27 +44,36 @@ function DogProteinChoicePage() {
 
   return (
     <div className="query-page">
-      <ProgressBar progress={40} />
-      <h1>Choose your protein</h1>
-      <div className="protein-grid">
-        {proteinOptions.map((protein) => (
-          <div
-            key={protein.name}
-            className={`protein-option ${
-              selectedProtein === protein.name ? 'selected' : ''
-            }`}
-          >
-            <label onClick={() => handleProteinChoice(protein["id"])}>
-              <img src={protein["image"]} alt={protein.name} />
-              {selectedProtein === protein.name && (
-                <span className="checkmark"><i className="bi bi-check-circle-fill"></i></span>
-              )}
-              <div className="protein-name">{protein.name}</div>
-            </label>
+      {isLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
-        ))}
-      </div>
-      <QueryFooter saveDogData={saveChange} dogData={dogData} back={"/dog-health-issues-form"} next={"/show-customized-diet"}/>
+        </div>
+      ) : (
+        <div className='query-container'>
+          <ProgressBar progress={40} />
+          <h1>Choose your protein</h1>
+          <div className="protein-grid">
+            {proteinOptions.map((protein) => (
+              <div
+                key={protein.name}
+                className={`protein-option ${selectedProtein === protein.name ? 'selected' : ''
+                  }`}
+              >
+                <label onClick={() => handleProteinChoice(protein["id"])}>
+                  <img src={protein["image"]} alt={protein.name} />
+                  {selectedProtein === protein.name && (
+                    <span className="checkmark"><i className="bi bi-check-circle-fill"></i></span>
+                  )}
+                  <div className="protein-name">{protein.name}</div>
+                </label>
+              </div>
+            ))}
+          </div>
+          <QueryFooter saveDogData={saveChange} dogData={dogData} back={"/dog-health-issues-form"} next={"/show-customized-diet"} />
+        </div>
+      )}
     </div>
   );
 }

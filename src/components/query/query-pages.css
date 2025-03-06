@@ -36,6 +36,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Align labels to the start */
+  margin: auto;
   margin-bottom: 20px;
   width: 300px; /* Match input width */
 }
@@ -71,6 +72,11 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.query-container {
+  width: 80%;
+  text-align: center;
 }
 
 .selected {
@@ -254,6 +260,7 @@
   flex-direction: column;
   align-items: flex-start;
   margin-top: 10px;
+  margin-left: 25%;
 }
 
 .health-issues-options label {
@@ -361,6 +368,7 @@
 .breed-select-container {
   position: relative;
   width: 300px;
+  margin: auto;
 }
 
 .breed-input {

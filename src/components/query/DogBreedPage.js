@@ -5,6 +5,7 @@ import ProgressBar from '../progressbar/ProgressBar';
 import useDogModel from './dogModel';
 
 function DogBreedPage() {
+  const [pageLoading, setPageLoading] = useState(true);
   const { dogDataModel, loading: dogModelLoading, error, fetchDogData, saveDogData } = useDogModel();
   const [dogData, setDogData] = useState(dogDataModel || null);
   const [breeds, setBreeds] = useState([]);
@@ -43,6 +44,7 @@ function DogBreedPage() {
       console.error('Error fetching breeds:', error);
     } finally {
       setLoading(false);
+      setPageLoading(false);
     }
   };
 
@@ -78,36 +80,46 @@ function DogBreedPage() {
 
   return (
     <div className="query-page">
-      <ProgressBar progress={9} />
-      <h1>What kind of dog is {dogDataModel?.name}?</h1>
-      <p>Many dogs are a unique blend of breeds, but a rough idea is still helpful. We use breed information to estimate your dog’s appropriate size and weight. That way, our nutritionists can recommend the right caloric intake.</p>
-
-      {loading ? (
-        <div>Loading breeds...</div>
+      {pageLoading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       ) : (
-        <div className="breed-select-container" ref={dropdownRef}>
-          <input
-            type="text"
-            className="breed-input"
-            placeholder="Search for a breed..."
-            value={searchTerm}
-            onChange={handleBreedChange}
-            onClick={toggleDropdownVisibility}
-          />
-          <button className="breed-dropdown-button" onClick={toggleDropdownVisibility}>▼</button>
-          {dropdownVisible && (
-            <ul className="breed-dropdown">
-              {filteredBreeds.map((breed) => (
-                <li key={breed.breedId} onClick={() => handleBreedSelect(breed)}>
-                  {breed.breedName}
-                </li>
-              ))}
-            </ul>
+        <div className='query-container'>
+          <ProgressBar progress={9} />
+          <h1>What kind of dog is {dogDataModel?.name}?</h1>
+          <p>Many dogs are a unique blend of breeds, but a rough idea is still helpful. We use breed information to estimate your dog’s appropriate size and weight. That way, our nutritionists can recommend the right caloric intake.</p>
+
+          {loading ? (
+            <div>Loading breeds...</div>
+          ) : (
+            <div className="breed-select-container" ref={dropdownRef}>
+              <input
+                type="text"
+                className="breed-input"
+                placeholder="Search for a breed..."
+                value={searchTerm}
+                onChange={handleBreedChange}
+                onClick={toggleDropdownVisibility}
+              />
+              <button className="breed-dropdown-button" onClick={toggleDropdownVisibility}>▼</button>
+              {dropdownVisible && (
+                <ul className="breed-dropdown">
+                  {filteredBreeds.map((breed) => (
+                    <li key={breed.breedId} onClick={() => handleBreedSelect(breed)}>
+                      {breed.breedName}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           )}
+
+          <QueryFooter saveDogData={saveBreedChange} dogData={dogData} back={"/dog-age-form"} next={"/dog-gender-form"} />
         </div>
       )}
-
-      <QueryFooter saveDogData={saveBreedChange} dogData={dogData} back={"/dog-age-form"} next={"/dog-gender-form"}/>
     </div>
   );
 }

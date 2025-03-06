@@ -30479,6 +30479,10 @@ svg .k-var--gauge-track {
     grid-template-rows: auto auto;
     background-color: #2c5b5b;
   }
+
+  .slick-slide {
+    margin: auto;
+  }
   
   .slider-dot {
     position: absolute;

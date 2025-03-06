@@ -177,3 +177,36 @@
   border-top: 1px solid #d0d0d0;
   margin-top: 60px;
 }
+
+/* Fade transition styles */
+.fade-enter {
+  opacity: 0。5;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  /* transition: opacity 300ms ease-in; */
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.5;
+  /* transition: opacity 300ms ease-out; */
+}
+
+/* Loading indicator styles */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #007bff; /* Bootstrap primary color */
+}
