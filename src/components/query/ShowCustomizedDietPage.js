@@ -13,7 +13,7 @@ function ShowCustomizedDietPage() {
   const fetchRecipe = useCallback(async () => {
     try {
       console.log(dogDataModel);
-      const response = await fetch('http://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/diet', {
+      const response = await fetch('https://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/diet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
