@@ -36,7 +36,7 @@ function DogBreedPage() {
   const fetchBreeds = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/all_breed');
+      const response = await fetch('https://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/all_breed');
       const responseObject = await response.json();
       setBreeds(responseObject?.data);
       setFilteredBreeds(responseObject?.data);
