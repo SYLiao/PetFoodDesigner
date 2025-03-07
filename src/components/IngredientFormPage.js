@@ -10,7 +10,7 @@ const IngredientFormPage = () => {
     const fetchIngredients = async () => {
       try {
         const response = await fetch(
-          'http://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/ingredients'
+          'https://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/ingredients'
         );
         const data = await response.json();
         console.log(data);
@@ -29,7 +29,7 @@ const IngredientFormPage = () => {
 
     try {
       const response = await fetch(
-        'http://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/recipeDetails',
+        'https://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/recipeDetails',
         {
           method: 'POST',
           headers: {
