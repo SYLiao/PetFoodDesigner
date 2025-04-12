@@ -1,126 +1,234 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import './query-pages.css';
-import './regular.css';
+import './ShowCustomizedDietPage.css';
 import QueryFooter from '../footer/QueryFooter';
 import ProgressBar from '../progressbar/ProgressBar';
 import useDogModel from './dogModel';
+import { useParams } from 'react-router-dom';
+import RecipeLoading from './RecipeLoading';
+import ReviewRecipe from './ReviewRecipe';
+import styles from './ShowCustomizedDietPage.module.css';
+import useRecipeModel from '../recipes/RecipeModel';
 
 function ShowCustomizedDietPage() {
+  const { dietId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const { dogDataModel, loading, error, fetchDogData, saveDogData } = useDogModel();
-  const [recipeModel, setRecipeModel] = useState({});
+  const [recipeModel, setRecipeModel] = useState(null);
+  const [showRecipeDetails, setShowRecipeDetails] = useState(false);
+  const { dogDataModel } = useDogModel();
+  const { recipeDataModel, saveRecipeData } = useRecipeModel();
 
-  const fetchRecipe = useCallback(async () => {
-    try {
-      console.log(dogDataModel);
-      const response = await fetch('https://ec2-18-117-254-10.us-east-2.compute.amazonaws.com:8081/mer/customer/get/diet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dogDataModel),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      const recipeList = result?.data?.recipes;
-      console.log(result);
-      if (recipeList.length > 0) {
-        setRecipeModel({
-          recipe: recipeList[0],
-          dailyCalories: result?.data?.dailyCalories,
-          feedFrequency: result?.data?.dailyCalories
-        });
-      }
-    } catch (e) {
-      console.error("Could not fetch recipe:", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [dogDataModel]);
+  const toggleRecipeDetails = () => {
+    setShowRecipeDetails(!showRecipeDetails);
+  };
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchRecipe();
-  }, [fetchRecipe]);
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        let mainProteinIds = [];
+        let plantProteinIds = [];
+        let grainIds = [];
+        let veggieIds = [];
+        let dairyIds = [];
+        let premixIds = [];
+        if (recipeDataModel !== undefined) {
+          if (recipeDataModel["proteinId"]) {
+            mainProteinIds.push(recipeDataModel["proteinId"]);
+          }
+          if (recipeDataModel["plantProteinIdList"]?.length > 0) {
+            recipeDataModel["plantProteinIdList"].map((id) => {plantProteinIds.push(id)});
+          }
+          if (recipeDataModel["grainIdList"]?.length > 0) {
+            recipeDataModel["grainIdList"].map((id) => {grainIds.push(id)});
+          }
+          if (recipeDataModel["veggieIdList"]?.length > 0) {
+            recipeDataModel["veggieIdList"].map((id) => {veggieIds.push(id)});
+          }
+        }
+        const response = await fetch('https://localhost:8081/mer/customer/get/recipeDetails',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              "maxAsh": 0,
+              "maxB1": 0,
+              "maxCarbohydrates": 0,
+              "maxFats": 16,
+              "maxFiber": 0,
+              "maxMoisture": 0,
+              "maxProtein": 27,
+              "maxSelenium": 0,
+              "minAsh": 0,
+              "minB1": 0,
+              "minCarbohydrates": 0,
+              "minFats": 15,
+              "minFiber": 0,
+              "minMoisture": 0,
+              "minProtein": 25,
+              "minSelenium": 0,
+              "preferredIngredient": {
+                "grainIds": [
+                  5
+                ],
+                "mainProteinIds": [
+                  1
+                ],
+                "plantProteinIds": [
+                  2, 3, 4
+                ],
+                "veggieIds": [
+                  6
+                ]
+              }
+            }),
+          });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result);
+
+        // Mock recipe data
+        const recipe = {
+          description: "A delicious and nutritious recipe for your dog.",
+          ingredientNames: result?.data?.ingredientNames,
+          ingredientValues: result?.data?.ingredientValues,
+          nutrientNames: result?.data?.nutrientNames,
+          nutrientValues: result?.data?.nutrientValues,
+          price: result?.data?.price
+        };
+        const price = 500;
+        const ingredients = {};
+
+        let dietData;
+        if (dietId) {
+          // Fetch diet data by dietId (replace with actual API call later)
+          dietData = {
+            recipe: {
+              name: "Mock Chicken Recipe (Diet ID: " + dietId + ")",
+              description: "This is a mock recipe description for diet ID " + dietId + ".",
+              caloriesPerKg: 1200,
+              crudeProtein: 30,
+              crudeFat: 20,
+              crudeFiber: 5,
+              moisture: 10
+            },
+            dailyCalories: 500,
+            feedFrequency: 2
+          };
+        } else {
+          // Use existing dogDataModel to fetch recipe (replace with actual API call later)
+          dietData = {
+            recipe: {
+              name: "Mock Chicken Recipe (Dog Data)",
+              description: "This is a mock recipe description based on dog data.",
+              caloriesPerKg: 1100,
+              crudeProtein: 28,
+              crudeFat: 18,
+              crudeFiber: 4,
+              moisture: 8
+            },
+            dailyCalories: 450,
+            feedFrequency: 3
+          };
+        }
+        setRecipeModel({
+          recipe: recipe,
+          price: price,
+          ingredients: ingredients,
+          dietData: dietData
+        });
+      } catch (error) {
+        console.error("Could not fetch recipe:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, [dietId, dogDataModel]);
+
+  const mockDogDataModel = {
+    name: "Mock Dog",
+    breed: "Golden Retriever",
+    weight: 25,
+    age: 5,
+    gender: "Male",
+    activeLevel: "Active"
+  };
+
+  if (isLoading) {
+    return (
+      <div className="customized-diet-page query-page">
+        <RecipeLoading />
+      </div>
+    );
+  }
 
   return (
-    <div className="query-page">
-      {isLoading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      ) : (
-        <div className='query-container'>
-          <ProgressBar progress={51} />
-          <h1>{dogDataModel?.name}'s Customized Diet</h1>
-          <p>Based on what you have told us about Shaw, our nutritionist recommends the following recipes. Let Shaw know that yumminess is on the way!</p>
+    <div className="customized-diet-page query-page">
+      <div className='query-container'>
+        <ProgressBar progress={51} />
+        <h1>{mockDogDataModel?.name}'s Customized Diet</h1>
+        <p>Based on what you have told us about Shaw, our nutritionist recommends the following recipes. Let Shaw know that yumminess is on the way!</p>
 
-          {recipeModel && Object.keys(recipeModel).length > 0 && (
-            <div className="slick-slide slick-current slick-active" tabIndex="0" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00" style={{ width: '880px' }} data-slick-index="0" aria-hidden="false">
-              <div style={{ position: 'relative' }} className="quiz-card-full vsp-radiobutton-selected active" onclick1="selectrecommendedproduct(this,2298, 1,0,20, 10);" id="divQA58_3268" dbid="divQA58_3268" questionid="58" runningtext="Beef, Beef Heart, Beef Kidney, Beef Liver, Quinoa, Chia Seeds, Ground Beef Bones, Vitamins&Minerals (Salt, Patassium Chloride, Zinc Proteinate, Iron Proteinate, Vitamin E Supplement, Copper Proteinate, Manganese Proteinate, Vitamin B5 Supplement, Vitamin B3 Supplement, Vitamin B2 Supplement, Vitamin B1 Supplement, Vitamin B6 Supplement, Folic Acid, Vitamin D3 Supplement, Vitamin B12 Supplement), Ground Flaxseed, Organic Kelp, Inulin, Pumpkin, Broccoli, Tocopherols, Blueberries, Cranberries" calfactor="0" questionnaireid="9" questionname="RecommendedDiets" questionanswerid="3268" questiondisplayname="RecommendedDiets">
-                <div className="vsp-easyrecipe-wrapper">
-                  <div id="title_feature_div" className="vsp-easyrecipe-title celwidget" data-feature-name="title" data-csa-c-id="z8adji-3wx2qa-djoebj-mvj109" data-cel-widget="title_feature_div">
-
-                    <div id="titleSection" className="a-section a-spacing-none">
-                      <h4 initialvalue="Beef with Grains Recipe" style={{ textAlign: 'center' }} className="h4 primary ">{recipeModel?.recipe?.name}</h4>
-                      <div initialvalue="$0.46 per day" style={{ color: '#d76c4e' }} className="quiz-body-text ">DailyCalories: {recipeModel.dailyCalories}</div>
-                    </div>
-                  </div>
-                  <div className="vsp-easyrecipe-image quiz-card-flex-wrapper" style={{ justifyContent: 'start', marginBottom: '-20px' }}>
-
-                  </div>
-                  <div className="vsp-easyrecipe-detals" style={{ textAlign: 'left', lineHeight: '18px', textAlign: 'center' }}>
-                    <img className="quiz-card-image hide-mobile-NOTUSED" src="./img/recipe/chicken.png" style={{ justifyContent: 'start' }} />
-                    <div className='recipe-container'><p><span>{recipeModel?.recipe?.description}</span></p></div>
-                    <table style={{ width: '80%', margin: '0 auto', textAlign: "left" }}>
-                      <tbody>
-                        <tr>
-                          <td colSpan="2"><strong>Nutritional Profile</strong></td>
-                        </tr>
-                        <tr>
-                          <td>ME content, Kcal/kg</td>
-                          <td>{recipeModel?.recipe?.caloriesPerKg}</td>
-                        </tr>
-                        <tr>
-                          <td>Crude Protein, %</td>
-                          <td>{recipeModel?.recipe?.crudeProtein}</td>
-                        </tr>
-                        <tr>
-                          <td>Crude Fat, %</td>
-                          <td>{recipeModel?.recipe?.crudeFat}</td>
-                        </tr>
-                        <tr>
-                          <td>Crude Fiber, %</td>
-                          <td>{recipeModel?.recipe?.crudeFiber}</td>
-                        </tr>
-                        <tr>
-                          <td>Moisture, %</td>
-                          <td>{recipeModel?.recipe?.moisture}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="button top-marginNOTUSED w-inline-block" style={{ padding: '7px', width: 'max-content', color: 'black', fontStyle: 'normal', margin: '20px auto' }}>
-                      <div onclick="selectrecommendedproduct(this,2298, 1,0,20, 10);" className="select-recipe button-inner-wrap" questionid="58" style={{ fontSize: '16px' }}>
-                        <div className="cf">
-                          Select this Recipe
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        {recipeModel && (
+          <div className="recipe-card">
+            <img className="recipe-image" src="./img/recipe/chicken.png" alt="Recipe" />
+            <div className="recipe-details">
+              <h4 className="recipe-name">{recipeModel?.dietData?.recipe?.name}</h4>
+              <div className="daily-calories">Daily Calories: {recipeModel?.dietData?.dailyCalories}</div>
+              <div className="feed-frequency">Feed Frequency: {recipeModel?.dietData?.feedFrequency}</div>
+              <div className='recipe-description'><p><span>{recipeModel?.dietData?.recipe?.description}</span></p></div>
+              <a onClick={toggleRecipeDetails} style={{fontSize: '16px', color: '#007bff', fontWeight: 'bold', cursor: 'pointer', marginBottom: '10px'}}>Show Recipe Details</a>
+              <table className="nutritional-profile">
+                <tbody>
+                  <tr>
+                    <td colSpan="2"><strong>Nutritional Profile</strong></td>
+                  </tr>
+                  <tr>
+                    <td>ME content, Kcal/kg</td>
+                    <td>{recipeModel?.dietData?.recipe?.caloriesPerKg}</td>
+                  </tr>
+                  <tr>
+                    <td>Crude Protein, %</td>
+                    <td>{recipeModel?.dietData?.recipe?.crudeProtein}</td>
+                  </tr>
+                  <tr>
+                    <td>Crude Fat, %</td>
+                    <td>{recipeModel?.dietData?.recipe?.crudeFat}</td>
+                  </tr>
+                  <tr>
+                    <td>Crude Fiber, %</td>
+                    <td>{recipeModel?.dietData?.recipe?.crudeFiber}</td>
+                  </tr>
+                  <tr>
+                    <td>Moisture, %</td>
+                    <td>{recipeModel?.dietData?.recipe?.moisture}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="button-container">
+                <div className="select-recipe-button">
+                  Select this Recipe
                 </div>
               </div>
             </div>
-          )}
+          </div>
+        )}
+        {showRecipeDetails && (
+          <div className={styles["floating-recipe"]}>
+            <ReviewRecipe onClose={toggleRecipeDetails}/>
+            <button onClick={toggleRecipeDetails}>Close</button>
+          </div>
+        )}
 
-          <QueryFooter />
-        </div>
-      )}
+        <QueryFooter />
+      </div>
     </div>
   );
 }

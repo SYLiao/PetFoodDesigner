@@ -1,0 +1,52 @@
+.diet-list-page .query-container {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.diet-list-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.diet-list {
+  list-style: none;
+  padding: 0;
+}
+
+.diet-item {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.diet-item:hover {
+  transform: scale(1.02);
+}
+
+.diet-link {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.diet-name {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.diet-description {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.diet-calories {
+  font-size: 14px;
+  color: #777;
+  text-align: right;
+}

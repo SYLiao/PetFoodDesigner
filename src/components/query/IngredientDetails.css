@@ -1,0 +1,80 @@
+.ingredient-details-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ingredient-details {
+  width: 80%;
+  max-width: 800px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.ingredient-columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ingredient-left-column {
+  width: 45%;
+}
+
+.ingredient-right-column {
+  width: 45%;
+}
+
+.ingredient-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.nutrition-table th {
+  background-color: #f2f2f2;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.price-input {
+  width: 60px;
+  margin-right: 5px;
+  height: 25px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.price-button {
+  font-size: 14px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #5cb85c;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.price-button:hover {
+  background-color: #4cae4c;
+}

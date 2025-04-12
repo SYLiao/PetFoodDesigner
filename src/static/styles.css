@@ -210,3 +210,7 @@
   height: 3rem;
   color: #007bff; /* Bootstrap primary color */
 }
+
+td {
+  padding: 8px;
+}

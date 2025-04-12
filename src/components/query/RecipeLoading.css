@@ -1,0 +1,18 @@
+.recipe-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.dog-running {
+  width: 100px;
+  margin-bottom: 20px;
+  /* Add animation here */
+}
+
+.loading-text {
+  font-size: 1.2em;
+  margin-top: 10px;
+}

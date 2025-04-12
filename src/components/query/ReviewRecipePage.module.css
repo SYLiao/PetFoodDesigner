@@ -1,14 +1,14 @@
-.customized-diet-page .query-container {
+.customizedDietPageQueryContainer {
   margin: 0 auto;
   max-width: 800px;
 }
 
-.customized-diet-page {
+.customizedDietPage {
   font-family: Arial, sans-serif;
   color: #333;
 }
 
-.recipe-card {
+.recipeCard {
   width: 90%;
   max-width: 600px;
   margin: 20px auto;
@@ -18,57 +18,57 @@
   background-color: #fff;
 }
 
-.recipe-image {
+.recipeImage {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.recipe-details {
+.recipeDetails {
   padding: 20px;
 }
 
-.recipe-name {
+.recipeName {
   font-size: 24px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-.daily-calories,
-.feed-frequency {
+.dailyCalories,
+.feedFrequency {
   font-size: 16px;
   color: #777;
   margin-bottom: 5px;
   text-align: center;
 }
 
-.recipe-description {
+.recipeDescription {
   font-size: 16px;
   line-height: 1.4;
   margin-bottom: 15px;
 }
 
-.nutritional-profile {
+.nutritionalProfile {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.nutritional-profile td {
+.nutritionalProfile td {
   padding: 8px 12px;
   border-bottom: 1px solid #eee;
   text-align: left;
 }
 
-.nutritional-profile tr:last-child td {
+.nutritionalProfile tr:last-child td {
   border-bottom: none;
 }
 
-.button-container {
+.buttonContainer {
   text-align: center;
 }
 
-.select-recipe-button {
+.selectRecipeButton {
   display: inline-block;
   padding: 10px 20px;
   background-color: #5cb85c;
@@ -79,6 +79,6 @@
   font-size: 16px;
 }
 
-.select-recipe-button:hover {
+.selectRecipeButton:hover {
   background-color: #4cae4c;
 }

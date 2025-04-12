@@ -3,19 +3,24 @@ import ProgressBar from '../progressbar/ProgressBar';
 import QueryFooter from '../footer/QueryFooter';
 import './query-pages.css';
 import useDogModel from './dogModel';
+import IngredientDetails from './IngredientDetails';
+import LeftContainer from './LeftContainer';
+import useRecipeModel from '../recipes/RecipeModel';
 
 function DogProteinChoicePage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [ingredientDetails, setIngredientDetails] = useState(null);
+  const [showIngredientDetails, setShowIngredientDetails] = useState(false);
   const proteinOptions = [
-    { id:1, name: 'Beef Recipe', image: './img/protein/beef.png' },
-    { id:2, name: 'Chicken Recipe', image: './img/protein/chicken.png' },
-    { id:3, name: 'Lamb Recipe', image: './img/protein/Lamb.png' },
-    { id:4, name: 'Pork Recipe', image: './img/protein/Pork.png' },
-    { id:5, name: 'Salmon Recipe', image: './img/protein/Salmon.png' },
-    { id:6, name: 'Veggie Recipe', image: './img/protein/Veggie.png' },
+    { id:64, name: 'Beef', image: './img/protein/beef.png' },
+    { id:68, name: 'Chicken', image: './img/protein/chicken.png' },
+    { id:79, name: 'Lamb', image: './img/protein/Lamb.png' },
+    { id:81, name: 'Pork', image: './img/protein/Pork.png' },
+    { id:76, name: 'Turkey', image: './img/protein/Salmon.png' },
   ];
 
-	const { dogDataModel, loading, error, fetchDogData, saveDogData } = useDogModel();
+	const { dogDataModel, saveDogData } = useDogModel();
+  const { recipeDataModel, saveRecipeData } = useRecipeModel();
   const [dogData, setDogData] = useState(dogDataModel || null);
   var selectedProtein = "";
 
@@ -38,12 +43,32 @@ function DogProteinChoicePage() {
   };
 
   const saveChange = (dogData) => {
+    saveRecipeData({...recipeDataModel, protein: selectedProtein, proteinId: dogData.proteinId});
     saveDogData(dogData);
+  };
+
+  const handleIngredientDetailsClick = async (id) => {
+    try {
+      const response = await fetch(`https://localhost:8081/mer/customer/get/ingredient/${id}`);
+      const data = await response.json();
+      console.log(data);
+      setIngredientDetails(data.data);
+      setShowIngredientDetails(true);
+    } catch (error) {
+      console.error('Error fetching ingredient details:', error);
+      // Handle error appropriately (e.g., display an error message)
+    }
+  };
+
+  const handleCloseIngredientDetails = () => {
+    setShowIngredientDetails(false);
+    setIngredientDetails(null);
   };
   
 
   return (
-    <div className="query-page">
+    <div className="query-page" style={{ display: 'flex' }}>
+      <LeftContainer />
       {isLoading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <div className="spinner-border" role="status">
@@ -51,7 +76,7 @@ function DogProteinChoicePage() {
           </div>
         </div>
       ) : (
-        <div className='query-container'>
+        <div className='query-container' style={{ flex: 1 }}>
           <ProgressBar progress={40} />
           <h1>Choose your protein</h1>
           <div className="protein-grid">
@@ -68,10 +93,22 @@ function DogProteinChoicePage() {
                   )}
                   <div className="protein-name">{protein.name}</div>
                 </label>
+                <button
+                  className="ingredient-details-button"
+                  onClick={() => handleIngredientDetailsClick(protein.id)}
+                >
+                  Details
+                </button>
               </div>
             ))}
           </div>
-          <QueryFooter saveDogData={saveChange} dogData={dogData} back={"/dog-health-issues-form"} next={"/show-customized-diet"} />
+          <QueryFooter saveDogData={saveChange} dogData={dogData} back={"/dog-health-issues-form"} next={"/dog-plant-protein-choice-page"} />
+          {showIngredientDetails && (
+            <IngredientDetails
+              ingredient={ingredientDetails}
+              onClose={handleCloseIngredientDetails}
+            />
+          )}
         </div>
       )}
     </div>

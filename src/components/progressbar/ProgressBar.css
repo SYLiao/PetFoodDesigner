@@ -1,4 +1,4 @@
-.progress-container {
+.query-page .progress-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   width: 75%;
 }
 
-.progress-full {
+.query-page .progress-full {
     display: flex;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: space-between;
@@ -26,7 +26,7 @@
     margin: 0 12.5% 0 12.5%;
 }
 
-.progress {
+.query-page .progress {
     display: flex;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: space-between;
@@ -37,18 +37,18 @@
     top: 25%;
     left: 0;
     transform: translateY(-50%);
-    height: 4px;
+    height: 8px;
     z-index: -1;
     margin: 0 12.5% 0 12.5%;
 }
 
-.circle.active {
+.query-page .circle.active {
   border-color: var(--line-border-fill);
   background-color: var(--line-border-fill);
   color: white;
 }
 
-.circle {
+.query-page .circle {
   background-color: #F1F2F5;
   color: #999;
   border-radius: 50%;
@@ -64,17 +64,17 @@
 }
 
 :root {
-    --line-border-fill: #3498db;
+    --line-border-fill: rgb(0, 0, 0);
     --line-border-empty: #e0e0e0;
 }
 
-.step-name {
+.query-page .step-name {
   font-size: 0.8em;
   color: var(--line-border-empty);
   text-align: center;
   margin-top: 5px;
 }
 
-.step-name.active {
+.query-page .step-name.active {
   color: var(--line-border-fill);
 }

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './static/styles.css';
 import Header from './components/header/Header';
 import BarkinBeefPage from './components/recipes/BarkinBeefPage';
@@ -15,9 +14,16 @@ import DogTreatPage from './components/query/DogTreatPage';
 import DogActiveLevelPage from './components/query/DogActiveLevelPage';
 import DogHealthIssuesPage from './components/query/DogHealthIssuesPage';
 import DogProteinChoicePage from './components/query/DogProteinChoicePage';
+import DogPlantProteinChoicePage from './components/query/DogPlantProteinChoicePage';
+import DogGrainChoicePage from './components/query/DogGrainChoicePage';
+import DogVeggieChoicePage from './components/query/DogVeggieChoicePage';
+import DogPremixChoicePage from './components/query/DogPremixChoicePage';
 import ShowCustomizedDietPage from './components/query/ShowCustomizedDietPage';
+import ShawDietChoicePage from './components/query/ShawDietChoicePage';
 import LoginPage from './user/LoginPage';
-import IngredientFormPage from './components/IngredientFormPage';
+import IngredientFormPage from './components/ingredientpage/IngredientFormPage';
+import EasyIngredientFormPage from './components/ingredientpage/EasyIngredientFormPage';
+import DietListPage from './components/query/DietListPage';
 
 const navLinks = [
   { text: 'Home', href: '/' },
@@ -95,9 +101,16 @@ function App() {
               <Route path="/dog-active-level-form" element={<DogActiveLevelPage />} />
               <Route path="/dog-treat-form" element={<DogTreatPage />} />
               <Route path="/dog-health-issues-form" element={<DogHealthIssuesPage />} />
-              <Route path="/dog-protein-choice-form" element={<DogProteinChoicePage />} />
-              <Route path="/show-customized-diet" element={<ShowCustomizedDietPage />} />
+              <Route path="/dog-protein-choice-page" element={<DogProteinChoicePage />} />
+              <Route path="/dog-plant-protein-choice-page" element={<DogPlantProteinChoicePage />} />
+              <Route path="/dog-grain-choice-page" element={<DogGrainChoicePage />} />
+              <Route path="/dog-veggie-choice-page" element={<DogVeggieChoicePage />} />
+              <Route path="/dog-premix-choice-page" element={<DogPremixChoicePage />} />
+              <Route path="/show-customized-diet/:dietId?" element={<ShowCustomizedDietPage />} />
               <Route path="/ingredient-form" element={<IngredientFormPage />} />
+              <Route path="/easy-ingredient-form" element={<EasyIngredientFormPage />} />
+              <Route path="/shaw-diet-choice-form" element={<ShawDietChoicePage />} />
+              <Route path="/diets" element={<DietListPage />} />
             </Routes>
       </div>
   );

@@ -1,10 +1,20 @@
 .query-page {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  flex-direction: row;
   align-items: center;
   font-family: sans-serif;
-  min-height: 100%;
-  padding-bottom: 70px;
+  min-height: 100vh;
+  align-items: stretch;
+.refresh-button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.refresh-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 }
 
 .query-page h1 {
@@ -77,6 +87,12 @@
 .query-container {
   width: 80%;
   text-align: center;
+  padding-bottom: 70px;
+}
+
+.recipe-container {
+  text-align: center;
+  padding-bottom: 70px;
 }
 
 .selected {
@@ -275,8 +291,8 @@
 }
 
 .protein-option {
-  width: 200px;
-  height: 250px;
+  width: 200px; 
+  height: 250px; 
   margin: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -322,311 +338,81 @@
   margin-top: 5px;
 }
 
-.protein-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.protein-option {
-  width: 200px;
-  height: 250px;
-  margin: 20px;
-  border: 1px solid #ccc;
+.left-container {
+  width: 25%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* background-image: url('/img/dogfitness/fine.png'); */
+  background-size: cover;
+  background-position: center;
 }
 
-.protein-option img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.protein-option label {
-  display: block;
-  padding: 10px;
-  font-weight: bold;
-  position: relative;
-}
-
-.protein-option.selected {
-  border-color: #ff6f61; /* PetPlate red */
-}
-
-.protein-option .checkmark {
+.ingredient-details-button {
   position: absolute;
   top: 5px;
-  left: 5px;
-  font-size: 1.5em;
-  color: #ff6f61; /* PetPlate red */
-}
-
-.breed-select-container {
-  position: relative;
-  width: 300px;
-  margin: auto;
-}
-
-.breed-input {
-  padding: 15px;
-  font-size: 1em;
-  border: 1px solid #e0e0e0;
+  right: 5px;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 5px 8px;
   border-radius: 5px;
-  margin-bottom: 20px;
-  width: 100%;
-  padding-right: 40px; /* Space for the button */
+  cursor: pointer;
+  font-size: 0.8em;
 }
 
-.breed-dropdown-button {
+.ingredient-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ingredient-details {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  max-height: 80%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.ingredient-details .close-button {
   position: absolute;
-  top: 40%;
+  top: 10px;
   right: 10px;
-  transform: translateY(-50%);
   background: none;
   border: none;
   font-size: 1.2em;
   cursor: pointer;
-  color: #666;
 }
 
-.breed-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.breed-dropdown li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.breed-dropdown li:hover {
-  background-color: #f0f0f0;
-}
-
-.protein-name {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.protein-grid {
+.ingredient-columns {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
-.protein-option {
-  width: 200px;
-  height: 250px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.protein-option img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.protein-option label {
-  display: block;
+.ingredient-left-column {
+  width: 50%;
   padding: 10px;
-  font-weight: bold;
-  position: relative;
 }
 
-.protein-option.selected {
-  border-color: #ff6f61; /* PetPlate red */
-}
-
-.protein-option .checkmark {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  font-size: 1.5em;
-  color: #ff6f61; /* PetPlate red */
-}
-
-.protein-name {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.protein-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.protein-option {
-  width: 200px;
-  height: 250px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.protein-option img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.protein-option label {
-  display: block;
+.ingredient-right-column {
+  width: 50%;
   padding: 10px;
-  font-weight: bold;
-  position: relative;
 }
 
-.protein-option.selected {
-  border-color: #ff6f61; /* PetPlate red */
-}
-
-.protein-option .checkmark {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  font-size: 1.5em;
-  color: #ff6f61; /* PetPlate red */
-}
-
-.protein-name {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.protein-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.protein-option {
-  width: 200px;
-  height: 250px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.protein-option img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.protein-option label {
-  display: block;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.protein-option.selected {
-  border-color: #ff6f61; /* PetPlate red */
-}
-
-.protein-option .checkmark {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  font-size: 1.5em;
-  color: #ff6f61; /* PetPlate red */
-}
-
-.protein-name {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.protein-name {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.protein-name {
-  display: block;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.protein-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.protein-option {
-  width: 200px;
-  height: 250px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.protein-option img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.protein-option label {
-  display: block;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.protein-option.selected {
-  border-color: #ff6f61; /* PetPlate red */
-}
-
-.protein-option .checkmark {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  font-size: 1.5em;
-  color: #ff6f61; /* PetPlate red */
+.ingredient-image {
+  max-width: 100%;
+  height: auto;
 }
